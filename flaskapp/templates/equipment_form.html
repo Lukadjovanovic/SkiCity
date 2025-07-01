@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Equipment Form{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Equipment Form</h1>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('render_index') }}">Home</a></li>
+      <li class="breadcrumb-item active"><a href="{{ url_for('render_equipment') }}">Equipment</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Equipment Form</li>
+    </ol>
+</nav>
+
+  <form action="{{ url_for('handle_new_equipment') }}" method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Equipment Name Please:</label>
+        <input required minlength="2" maxlength="100" type="text" class="form-control" name="name" id="name">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Max Quantity Please:</label>
+        <input required minlength="1" maxlength="5" type="text" class="form-control" name="max" id="max">
+    </div> 
+     <div class="mt-4">
+        <a href="{{ url_for('render_equipment') }}" class = "btn btn-secondary">Discard🗑️</a>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-secondary" type="reset">Clear</button>
+     </div>
+     
+ </form>
+ 
+{% endblock %}

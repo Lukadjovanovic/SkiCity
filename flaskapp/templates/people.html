@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}People{% endblock %} 
+
+{% block content %}
+
+<h1>People</h1>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url_for('render_index') }}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">People</li>
+  </ol>
+</nav>
+<div>
+    <a href="{{ url_for('handle_new_person') }}" class = "btn btn-primary btn-lg">Add New Person</a>
+
+    <table class = table>
+        <thead class = "table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Height</th>
+                <th>Shoe Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in people %}
+            <tr>
+                <td><a href ="{{ url_for('render_person', person_id = person['id']) }}">{{ person['name'] }}</a></td>
+                <td>{{ person['email'] }}</td>
+                <td>{{ (person['height']|int) // 12 }}' {{ (person['height']|int) % 12 }}"</td>
+                <td>{{ person['shoesize'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}

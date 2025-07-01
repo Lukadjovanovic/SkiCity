@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Person Form{% endblock %}
+
+{% block content %}
+<h1 class="display-4">New Person Form</h1>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('render_index') }}">Home</a></li>
+      <li class="breadcrumb-item active"><a href="{{ url_for('render_people') }}">People</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Person Form</li>
+    </ol>
+</nav>
+
+  <form action="{{ url_for('handle_new_person') }}" method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Your Full Name Please:</label>
+        <input required minlength="2" maxlength="100" type="text" class="form-control" name="name" id="name">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Your Email Please:</label>
+        <input required minlength="2" maxlength="150"type="text" class="form-control" name="email" id="email">
+    </div>
+    <div class="form-group">
+        <label for="feetheight">The feet of your height</label>
+        <select class="form-control" id="feetheight" name="feetheight">
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+        </select>
+      
+      <label for="inchheight">The inches of your height:</label>
+        <select class="form-control" id="inchheight" name="inchheight">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="shoe_size" class="form-label">Shoe Size:</label>
+        <select class="form-select" id="shoe_size" name="shoe_size" >
+            <option value="5.5">5.5</option>
+            <option value="6">6</option>
+            <option value="6.5">6.5</option>
+            <option value="7">7</option>
+            <option value="7.5">7.5</option>
+            <option value="8">8</option>
+            <option value="8.5">8.5</option>
+            <option value="9">9</option>
+            <option value="9.5">9.5</option>
+            <option value="10">10</option>
+            <option value="10.5">10.5</option>
+            <option value="11">11</option>
+            <option value="11.5">11.5</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+        </select>
+    </div>
+     <div class="mt-4">
+        <a href="{{ url_for('render_people') }}" class = "btn btn-secondary">Discard🗑️</a>
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+        <button class="btn btn-secondary" type="reset">Clear</button>
+     </div>
+     
+ </form>
+ 
+{% endblock %}

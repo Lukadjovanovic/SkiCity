@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Equipment{% endblock %} 
+{% block content %}
+<h1>Equipment</h1>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url_for('render_index') }}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Equipment</li>
+  </ol>
+</nav>
+<a href="{{ url_for('handle_new_equipment') }}" class = "btn btn-primary btn-lg">Add New Equipment</a>
+
+<table class="table">
+  <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+  </tr>
+
+  {% for category in ["Poles", "Miscellaneous", "Skis", "Boots"] %}
+      <tr class="category-row">
+          <td><strong>{{ category }}</strong></td>
+          <td></td> 
+      </tr>
+      {% for row in equipment %}
+          {% if row["category"] == category %}
+              <tr>
+                  <td>{{ row['name'] }}</td>
+                  <td>{{ row['quantity'] }}/{{ row['maxquantity'] }}</td>
+              </tr>
+          {% endif %}
+      {% endfor %}
+  {% endfor %}
+</table>
+{% endblock %}

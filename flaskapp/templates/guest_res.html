@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Equipment{% endblock %} 
+{% block content %}
+<h1>Guest Reservation</h1>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('render_index') }}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Guest Reservations</li>
+    </ol>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Checkin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if checkin_people %}
+                        {% for person in checkin_people %}
+                        <tr>
+                            <td>{{ person['name'] }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ url_for('render_checkin_form', id=person['id']) }}">Check In</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="2">No one is here</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Check Out</th>
+                        <th>Pass</th>
+                        <th>Boots</th>
+                        <th>Skis</th>
+                        <th>Poles</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if checkout_people %}
+                        {% for person in checkout_people %}
+                        <tr>
+                            <td>{{ person['name'] }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ url_for('submit_checkout', id=person['id']) }}">Check Out</a>
+                            </td>
+                            {% for i in ['pass_type','boot_size','ski_size','pole_size'] %}
+                            <td>{{ person[i] }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>No one is here</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

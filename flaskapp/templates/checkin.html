@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Check In Guest{% endblock %}
+{% block content %}
+<h2>Checking In: {{ person['name'] }}</h2>
+
+<form method="post" action="{{ url_for('submit_checkin', id=person['id']) }}">
+    <div class="mb-3">
+        <label class="form-label">Pass Type:</label><br>
+        <input type="radio" name="pass_type" value="Lodge Pass" required> Lodge Pass<br>
+        <input type="radio" name="pass_type" value="Lift Ticket"> Lift Ticket
+    </div>
+
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" name="rent_equipment" id="rent_equipment">
+        <label class="form-check-label" for="rent_equipment">Renting Equipment?</label>
+    </div>
+
+    <div id="equipment-section">
+        <label>Boot Size:</label>
+        <select name="boot_size" class="form-select">
+            {% set recommended = person['shoesize']|string + ' US' %}
+            {% for size in boot_sizes %}
+                <option value="{{ size }}" {% if size == recommended %}selected{% endif %}>
+                    {{ size }}{% if size == recommended %} (Recommended){% endif %}
+                </option>
+            {% endfor %}
+        </select>
+
+
+        <label>Ski Size:</label>
+        <select name="ski_size" class="form-select">
+            {% if person['height'] <=42 %}
+                {% set recommended = '80 cm' %}
+            {% elif person['height'] <=48 %}
+                {% set recommended = '100 cm' %}
+            {% elif person['height'] <=54 %}
+                {% set recommended = '125 cm' %}
+            {% elif person['height'] <=60 %}
+                {% set recommended = '140 cm' %}
+            {% elif person['height'] <=66 %}
+                {% set recommended = '155 cm' %}
+            {% else %}
+                {% set recommended = '170 cm' %}
+            {% endif %}
+            
+            {% for size in ski_sizes %}
+                <option value="{{ size }}" {% if size == recommended %}selected{% endif %}>
+                    {{ size }} {% if size == recommended %}(Recommended){% endif %}
+                </option>
+            {% endfor %}
+        </select>
+        
+
+        <label>Pole Size:</label>
+        <select name="pole_size" class="form-select">
+            {% set h = person['height'] %}
+            {% if h <= 42 %}
+                {% set recommended = '30 in' %}
+            {% elif h <= 48 %}
+                {% set recommended = '34 in' %}
+            {% elif h <= 54 %}
+                {% set recommended = '38 in' %}
+            {% elif h <= 60 %}
+                {% set recommended = '42 in' %}
+            {% elif h <= 66 %}
+                {% set recommended = '46 in' %}
+            {% elif h <= 72 %}
+                {% set recommended = '50 in' %}
+            {% else %}
+                {% set recommended = '54 in' %}
+            {% endif %}
+            {% for size in pole_sizes %}
+                <option value="{{ size }}" {% if size == recommended %}selected{% endif %}>
+                    {{ size }}{% if size == recommended %} (Recommended){% endif %}
+                </option>
+            {% endfor %}
+        </select>
+
+    </div>
+
+    <button class="btn btn-success mt-3" type="submit">Finish Check-In</button>
+</form>
+{% endblock %}

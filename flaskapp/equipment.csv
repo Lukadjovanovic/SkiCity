@@ -1,0 +1,35 @@
+name,quantity,maxquantity,category
+80 cm,40,40,Skis
+100 cm,40,40,Skis
+125 cm,40,40,Skis
+140 cm,40,40,Skis
+155 cm,40,40,Skis
+170 cm,40,40,Skis
+
+30 in,25,25,Poles
+34 in,25,25,Poles
+38 in,25,25,Poles
+42 in,25,25,Poles
+46 in,25,25,Poles
+50 in,25,25,Poles
+54 in,25,25,Poles
+
+
+5.5 US,10,10,Boots
+6.0 US,10,10,Boots
+6.5 US,10,10,Boots
+7.0 US,10,10,Boots
+7.5 US,10,10,Boots
+8.5 US,10,10,Boots
+9.5 US,10,10,Boots
+10.5 US,10,10,Boots
+11.5 US,10,10,Boots
+12 US,10,10,Boots
+13.0 US,10,10,Boots
+8.0 US,10,10,Boots
+9.0 US,10,10,Boots
+10.0 US,10,10,Boots
+11.0 US,10,10,Boots
+
+Lodge Pass,100,100,Miscellaneous
+Lift Ticket,150,150,Miscellaneous

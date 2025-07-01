@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Person Form{% endblock %}
+
+{% block content %}
+<h1 class="display-4">{{ person['name'] }}</h1>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('render_index') }}">Home</a></li>
+      <li class="breadcrumb-item active"><a href="{{ url_for('render_people') }}">People</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ person['name'] }}</li>
+    </ol>
+</nav>
+
+<form action="{{ url_for('handle_person_update', person_id=person['id']) }}" method="post">
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" name="name" id="name" value="{{ person['name'] }}">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" name="email" id="email" value="{{ person['email'] }}">
+    </div>
+    <div class="form-group">
+        <label for="feetheight">Height in Feet</label>
+        <select class="form-control" id="feetheight" name="feetheight">
+            <option value="3" {% if person['height'] // 12 == 3 %}selected{% endif %}>3</option>
+            <option value="4" {% if person['height'] // 12 == 4 %}selected{% endif %}>4</option>
+            <option value="5" {% if person['height'] // 12 == 5 %}selected{% endif %}>5</option>
+            <option value="6" {% if person['height'] // 12 == 6 %}selected{% endif %}>6</option>
+        </select>
+    </div>
+      
+    <div class="form-group">
+        <label for="inchheight">Height in Inches</label>
+        <select class="form-control" id="inchheight" name="inchheight">
+            {% for inch in range(0, 12) %}
+            <option value="{{ inch }}" {% if person['height'] % 12 == inch %}selected{% endif %}>{{ inch }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <label for="shoe_size" class="form-label">Shoe Size:</label>
+        <select class="form-select" id="shoe_size" name="shoe_size">
+            {% for size in [5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14, 15, 16] %}
+            <option value="{{ size }}" {% if person['shoesize'] == size %}selected{% endif %}>{{ size }}</option>
+            {% endfor %}
+        </select>
+    </div>
+     <div class="mt-4">
+        <a href="{{ url_for('render_people') }}" class = "btn btn-secondary">Discard🗑️</a>
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+        <button class="btn btn-secondary" type="reset">Clear</button>
+     </div>
+     
+ </form>
+ 
+{% endblock %}
+
+

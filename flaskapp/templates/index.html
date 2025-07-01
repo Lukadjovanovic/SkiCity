@@ -1,0 +1,70 @@
+
+{% extends "base.html" %}
+
+{% block title %}Ski City{% endblock %}
+
+{% block content %}
+<h2>Ski City</h2>
+<div class="card h-100 hvr-grow" style="width: 18rem;">
+    <img src="{{ url_for('static', filename = 'images/hot-chocolate.jpg') }}" class="card-img-top">
+
+    <div class="card-body">
+        {% for item in equipment %}
+            {% if item['name'] == 'Lodge Pass' %}
+                <h2 class="card-title">In The Lodge: {{ item['maxquantity'] - item['quantity'] }}</h2>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<div class="card h-100 hvr-grow" style="width: 18rem;">
+    <img src="{{ url_for('static', filename = 'images/ski-slope.jpg') }}" class="card-img-top">
+
+    <div class="card-body">
+        {% for item in equipment %}
+            {% if item['name'] == 'Lift Ticket' %}
+                <h2 class="card-title">On the Slopes: {{ item['maxquantity'] - item['quantity'] }}</h2>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+<h2 class="mt-5">Equipment Checked Out:</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Boot Sizes</th>
+        <th># Available</th>
+    </tr>
+    {% for item in equipment %}
+        {% if item['category'].lower() == 'boots' and item['quantity'] < item['maxquantity'] %}
+            <tr>
+                <td>{{ item['name'] }}</td>
+                <td>{{ item['quantity'] }}/{{ item['maxquantity'] }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    <tr>
+        <th>Ski Lengths</th>
+    </tr>
+    {% for item in equipment %}
+        {% if item['category'].lower() == 'skis' and item['quantity'] < item['maxquantity'] %}
+            <tr>
+                <td>{{ item['name'] }}</td>
+                <td>{{ item['quantity'] }}/{{ item['maxquantity'] }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    <tr>
+        <th>Pole Heights</th>
+    </tr>
+    {% for item in equipment %}
+        {% if item['category'].lower() == 'poles' and item['quantity'] < item['maxquantity'] %}
+            <tr>
+                <td>{{ item['name'] }}</td>
+                <td>{{ item['quantity'] }}/{{ item['maxquantity'] }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+
+{% endblock %}

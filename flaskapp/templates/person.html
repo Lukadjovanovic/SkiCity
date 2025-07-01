@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ person['name'] }}{% endblock %} 
+
+{% block content %}
+
+<h1>{{ person['name'] }} Info</h1>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('render_index') }}">Home</a></li>
+      <li class="breadcrumb-item active"><a href="{{ url_for('render_people') }}">People</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ person['name'] }}</li>
+    </ol>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Height</th>
+            <th>Shoe Size</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ person['name'] }}</td>
+            <td>{{ person['email'] }}</td>
+            <td>{{ (person['height']|int) // 12 }}' {{ (person['height']|int) % 12 }}"</td>
+            <td>{{ person['shoesize'] }}</td>
+        </tr>
+    </tbody>
+</table>
+<a href="{{ url_for('render_people_edit', person_id=person['id']) }}" type="button" class="btn btn-secondary">Edit</a>
+
+
+{% endblock %}
